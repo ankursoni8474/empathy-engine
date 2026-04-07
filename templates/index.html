@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Empathy Engine</title>
@@ -78,6 +78,124 @@
         </div>
         {% endif %}
     </div>
+
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Empathy Engine</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 450px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #ff7eb3;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff4e8b;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .emotion {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        audio {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🎙️ Empathy Engine</h1>
+
+    <form method="POST">
+        <textarea name="text" rows="4" placeholder="Type something..."></textarea>
+        <br>
+        <button type="submit">Generate Speech 🚀</button>
+    </form>
+
+    {% if audio %}
+    <div class="result">
+        
+        <div class="emotion">
+            Detected Emotion: 
+            
+            {% if emotion == "very_positive" %}
+                😍 Very Positive
+            {% elif emotion == "positive" %}
+                😊 Positive
+            {% elif emotion == "neutral" %}
+                😐 Neutral
+            {% elif emotion == "negative" %}
+                😞 Negative
+            {% elif emotion == "very_negative" %}
+                😡 Very Negative
+            {% else %}
+                {{ emotion }}
+            {% endif %}
+
+        </div>
+
+        <audio controls>
+            <source src="{{ url_for('static', filename='output.mp3') }}" type="audio/mpeg">
+        </audio>
+    </div>
+    {% endif %}
+</div>
 
 </body>
 </html>
